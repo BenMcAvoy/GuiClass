@@ -46,6 +46,10 @@ void StatusBar::Render() {
 	}
 
 	if (ImGui::BeginPopupModal("Pick a process", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+		if (ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_Escape))) {
+			ImGui::CloseCurrentPopup();
+		}
+
 		if (ImGui::BeginChild("Process list", ImVec2(400, 300), true)) {
 			// Search
 			static char search[128] = "";
