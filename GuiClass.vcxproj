@@ -154,6 +154,8 @@
     <ClInclude Include="include\imgui\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="include\imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="include\imgui\imgui.h" />
+    <ClInclude Include="src\Ribbon.h" />
+    <ClInclude Include="src\StatusBar.h" />
     <ClInclude Include="src\utils.h" />
   </ItemGroup>
   <ItemGroup>

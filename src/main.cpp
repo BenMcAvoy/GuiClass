@@ -11,53 +11,19 @@
 
 #include <stdio.h>
 
+#include "StatusBar.h"
+#include "Ribbon.h"
 #include "utils.h"
 
-void render() {
-	// -------------- //
-	// ---- MENU ---- //
-	// -------------- //
+StatusBar statusBar;
+Ribbon ribbon;
 
-	// Create the main menu bar
-	ImGui::BeginMainMenuBar();
-	if (ImGui::BeginMenu("File")) {
-		if (ImGui::MenuItem("New", "Ctrl+N")) {}
-		if (ImGui::MenuItem("Open", "Ctrl+O")) {}
-		if (ImGui::MenuItem("Save", "Ctrl+S")) {}
-		ImGui::EndMenu();
-	}
+static void render() {
+	// --- MENU --- //
+	statusBar.Render();
 
-	if (ImGui::BeginMenu("Process")) {
-		if (ImGui::MenuItem("Pick a process")) {
-			INFO("Picking a process\n");
-		}
-
-		ImGui::EndMenu();
-	}
-
-	float windowWidth = ImGui::GetIO().DisplaySize.x;
-	ImVec2 textSize = ImGui::CalcTextSize("No process selected");
-	ImGui::SetCursorPosX((windowWidth - textSize.x) / 2);
-
-	if (ImGui::Selectable("No process selected", false, ImGuiSelectableFlags_None, textSize)) {
-		INFO("Picking a process\n");
-	}
-
-
-	ImGui::EndMainMenuBar();
-
-	// -------------- //
-	// --- RIBBON --- //
-	// -------------- //
-
-	// Create a window at the top of the screen for the ribbon
-	ImGui::SetNextWindowPos(ImVec2(0, ImGui::GetFrameHeight()), ImGuiCond_Always);
-	ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, 50), ImGuiCond_Always);
-	ImGui::Begin("Ribbon", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-
-	ImGui::Text("Ribbon");
-
-	ImGui::End();
+	// -- RIBBON -- //
+	ribbon.Render();
 }
 
 void update() {
