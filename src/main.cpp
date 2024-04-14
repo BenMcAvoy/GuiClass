@@ -103,7 +103,7 @@ int main(void) {
 	ImGuiIO& io = ImGui::GetIO();
 
 	// Set font to arial
-	io.Fonts->AddFontFromFileTTF("../../resources/JetBrainsMonoNerdFont-Regular.ttf", 20.0f);
+	io.Fonts->AddFontFromFileTTF("JetBrainsMonoNerdFont-Regular.ttf", 20.0f);
 
 	if (io.Fonts->Fonts.empty())
 		ERROR("Failed to load font\n");
