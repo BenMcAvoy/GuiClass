@@ -7,7 +7,7 @@
 class StatusBar {
 private:
 	bool processPickerModalOpen = false;
-	std::string selectedProcess = "No process selected";
+	std::string selectedProcess = "Select a process";
 
 public:
 	void Render();
@@ -28,9 +28,11 @@ void StatusBar::Render() {
 	}
 
 	if (ImGui::BeginMenu("Process")) {
-		if (ImGui::MenuItem("Pick a process")) {
-			INFO("Picking a process\n");
-			ImGui::OpenPopup("Pick a process");
+		if (ImGui::MenuItem("Detach")) {
+			INFO("Detaching from handle %p\n", &globals::processHandle);
+			this->selectedProcess = "Select a process";
+			CloseHandle(globals::processHandle);
+			globals::processHandle = NULL;
 		}
 
 		ImGui::EndMenu();
