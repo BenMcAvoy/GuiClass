@@ -65,6 +65,9 @@
     <ClInclude Include="src\Ribbon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

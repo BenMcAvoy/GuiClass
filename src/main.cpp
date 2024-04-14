@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include "StatusBar.h"
+#include "globals.h"
 #include "Ribbon.h"
 #include "utils.h"
 
@@ -58,7 +59,7 @@ int main(void) {
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 130");
 
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window) && !globals::shouldExit) {
 		glfwPollEvents();
 
 		ImGui_ImplOpenGL3_NewFrame();
@@ -83,56 +84,3 @@ int main(void) {
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
-
-/*#define WIN32_LEAN_AND_MEAN
-
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "opengl32.lib")
-
-#include <windows.h>
-
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
-
-#include "imgui.h"
-
-#include "GLFW/glfw3.h"
-
-#include <windows.h>
-int main(void) {
-	GLFWwindow* window;
-
-	if (!glfwInit())
-		return -1;
-
-	window = glfwCreateWindow(1280, 720, "Hello, ImGui!", NULL, NULL);
-
-	if (!window) {
-		glfwTerminate();
-		return -1;
-	}
-
-	glfwMakeContextCurrent(window);
-
-	while (!glfwWindowShouldClose(window)) {
-		glfwPollEvents();
-
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
-
-		ImGui::Begin("Hello, ImGui!");
-		ImGui::Text("Hello, world!");
-		ImGui::End();
-
-		ImGui::Render();
-		ImGui_ImplGlfw_RenderDrawData(ImGui::GetDrawData());
-
-		glfwSwapBuffers(window);
-
-		glfwPollEvents();
-	}
-
-	glfwTerminate();
-
-	return 0;
-}*/

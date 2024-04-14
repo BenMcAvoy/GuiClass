@@ -1,5 +1,6 @@
 #pragma once
 
+#include "globals.h"
 #include "utils.h"
 #include <imgui.h>
 
@@ -14,7 +15,10 @@ void StatusBar::Render() {
 		if (ImGui::MenuItem("New", "Ctrl+N")) {}
 		if (ImGui::MenuItem("Open", "Ctrl+O")) {}
 		if (ImGui::MenuItem("Save", "Ctrl+S")) {}
-		if (ImGui::MenuItem("Quit", "Ctrl+S")) {}
+		if (ImGui::MenuItem("Quit", "Ctrl+Q")) {
+			globals::shouldExit = true;
+			INFO("Exiting %d\n", globals::shouldExit);
+		}
 
 		ImGui::EndMenu();
 	}
