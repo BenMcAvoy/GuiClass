@@ -113,7 +113,7 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)resources\JetBrainsMonoNerdFont-Regular.ttf $(ProjectDir)x64\Debug\JetBrainsMonoNerdFont-Regular.ttf</Command>
+      <Command>copy /Y $(ProjectDir)resources\JetBrainsMonoNerdFont-Regular.ttf $(ProjectDir)x64\Debug\JetBrainsMonoNerdFont-Regular.ttf || true</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,7 +135,7 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)resources\JetBrainsMonoNerdFont-Regular.ttf $(ProjectDir)x64\Release\JetBrainsMonoNerdFont-Regular.ttf</Command>
+      <Command>copy /Y $(ProjectDir)resources\JetBrainsMonoNerdFont-Regular.ttf $(ProjectDir)x64\Release\JetBrainsMonoNerdFont-Regular.ttf || true</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -154,6 +154,7 @@
     <ClInclude Include="include\imgui\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="include\imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="include\imgui\imgui.h" />
+    <ClInclude Include="src\utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
