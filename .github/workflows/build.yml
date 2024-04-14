@@ -47,4 +47,4 @@ jobs:
         path: |
           D:\a\GuiClass\GuiClass\x64\Release\GuiClass.exe
           D:\a\GuiClass\GuiClass\x64\Release\glfw3.dll
-          D:\a\GuiClass\GuiClass\resources/JetBrainsMonoNerdFont-Regular.ttf
+          D:\a\GuiClass\GuiClass\x64\Release\JetBrainsMonoNerdFont-Regular.ttf
