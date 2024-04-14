@@ -36,3 +36,6 @@ x64
 
 # Local settings
 .vs
+
+# Packages
+packages
