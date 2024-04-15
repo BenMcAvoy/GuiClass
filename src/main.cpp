@@ -7,7 +7,12 @@
 #include <stdio.h>
 
 #include "font.h"
-#include "utils.h"
+#include "logging.h"
+
+#include "globals.cpp"
+
+#include "ribbon.h"
+#include "statusbar.h"
 
 /* Called for rendering */
 void render() {
@@ -18,6 +23,9 @@ void render() {
 
 	ImGui::End();
 }
+
+Ribbon ribbon;
+StatusBar statusbar;
 
 int main(void) {
 	GLFWwindow* window;
@@ -46,9 +54,11 @@ int main(void) {
 	config.FontDataOwnedByAtlas = false;
 	io.Fonts->AddFontFromMemoryTTF(fonts::JetBrainsMonoNerdFont_Regular_ttf, sizeof(fonts::JetBrainsMonoNerdFont_Regular_ttf), 20.0f, &config, io.Fonts->GetGlyphRangesDefault());
 
-	if (io.Fonts->Fonts.empty()) {
-		fprintf(stderr, "Failed to load font\n");
-	}
+	ImGuiStyle& style = ImGui::GetStyle();
+	style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.5f, 0.5f, 0.5f, 1.0f);
+
+	if (io.Fonts->Fonts.empty())
+		ERROR("Failed to load font\n");
 
 	/* Setup Dear ImGui style */
 	ImGui::StyleColorsDark();
@@ -58,7 +68,7 @@ int main(void) {
 	ImGui_ImplOpenGL3_Init("#version 130");
 
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window) && !globals::shouldExit) {
 		glfwPollEvents();
 
 		/* Start the ImGui frame */
@@ -66,8 +76,10 @@ int main(void) {
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		/* Render ImGui */
-		render();
+		/* Render UI */
+		ribbon.Render();
+		statusbar.Render();
+
 		ImGui::Render();
 
 		/* Render OpenGL */
