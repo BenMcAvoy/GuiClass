@@ -1,25 +1,34 @@
+# Project configuration
 cmake_minimum_required(VERSION 3.0)
-project(CMakeDemo)
+project(GuiClass)
 
+# Lib paths
+set(IMGUI_PATH ${PROJECT_SOURCE_DIR}/libs/imgui)
+set(GLFW_PATH ${PROJECT_SOURCE_DIR}/libs/glfw)
+
+# Build options
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_VERBOSE_MAKEFILE 1)
+set(CMAKE_CXX_STANDARD 20)
 
+# Configure GLFW
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+add_subdirectory(${GLFW_PATH})
 
-add_library(imgui STATIC
-    libs/imgui/imgui.cpp
-    libs/imgui/imgui_demo.cpp
-    libs/imgui/imgui_draw.cpp
-    libs/imgui/imgui_widgets.cpp
-)
+# Configure ImGui
+file(GLOB IMGUI_SOURCES ${IMGUI_PATH}/*.cpp)
+add_library(imgui STATIC ${IMGUI_SOURCES})
+target_include_directories(imgui PUBLIC ${IMGUI_PATH})
 
-add_subdirectory(libs/glfw)
-
+# Build the project
 add_executable(main main.cpp)
 
+# Link with GLFW and ImGui
 target_link_libraries(main glfw imgui)
 include_directories(${PROJECT_SOURCE_DIR})
 
+# Link with OpenGL
 find_package(OpenGL REQUIRED)
 target_link_libraries(main OpenGL::GL)
