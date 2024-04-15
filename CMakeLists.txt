@@ -23,12 +23,12 @@ add_library(imgui STATIC ${IMGUI_SOURCES})
 target_include_directories(imgui PUBLIC ${IMGUI_PATH} ${GLFW_PATH}/include)
 
 # Build the project
-add_executable(main src/main.cpp)
+add_executable(GuiClass src/main.cpp)
 
 # Link with GLFW and ImGui
-target_link_libraries(main glfw imgui)
+target_link_libraries(GuiClass glfw imgui)
 include_directories(${PROJECT_SOURCE_DIR})
 
 # Link with OpenGL
 find_package(OpenGL REQUIRED)
-target_link_libraries(main OpenGL::GL)
+target_link_libraries(GuiClass OpenGL::GL)
