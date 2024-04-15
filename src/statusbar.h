@@ -3,14 +3,19 @@
 #include "globals.cpp"
 #include "element.h"
 #include "logging.h"
+#include "utils.h"
 
 #include <imgui.h>
+
+#include <algorithm>
+#include <iostream>
 #include <string>
+#include <vector>
+#include <cctype>
 
 class StatusBar : public Element {
 	private:
 		bool processPickerModalOpen = false;
-		std::string selectedProcess = "Select a process";
 
 	public:
 		void Render() override {
@@ -24,21 +29,29 @@ class StatusBar : public Element {
 					INFO("Exiting %d\n", globals::shouldExit);
 				}
 
+				if (ImGui::BeginMenu("Debug")) {
+					if (ImGui::MenuItem("Print handle address")) {
+						INFO("Handle address: %p\n", &globals::process.handle);
+					}
+
+					ImGui::EndMenu();
+				}
+
 				ImGui::EndMenu();
 			}
 
 			if (ImGui::BeginMenu("Process")) {
-				bool disabled = globals::processHandle == nullptr;
+				bool disabled = globals::process.name == globals::emptyProcess.name;
 
 				if (disabled)
 					ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
 
 				if (ImGui::MenuItem("Detach", "Ctrl+D", false, !disabled)) {
-					INFO("Detaching from process\n");
-					globals::processHandle = nullptr;
+					INFO("Detaching from process with handle %p\n", &globals::process.handle);
+					globals::process = globals::emptyProcess;
 
 #ifdef _WIN32
-					CloseHandle(globals::processHandle);
+					CloseHandle(globals::process.handle);
 #endif
 				}
 
@@ -49,11 +62,12 @@ class StatusBar : public Element {
 			}
 
 			float windowWidth = ImGui::GetIO().DisplaySize.x;
-			ImVec2 textSize = ImGui::CalcTextSize(this->selectedProcess.c_str());
+			ImVec2 textSize = ImGui::CalcTextSize(globals::process.name.c_str());
 			ImGui::SetCursorPosX((windowWidth - textSize.x) / 2);
 
-			if (ImGui::Selectable(this->selectedProcess.c_str(), false, ImGuiSelectableFlags_None, textSize)) {
-				INFO("Picking a process\n");
+			const std::string displayProcess = globals::process.name + " : " + std::to_string(globals::process.pid);
+			const std::string conditionalProcess = globals::process.name == globals::emptyProcess.name ? "Select a process" : displayProcess;
+			if (ImGui::Selectable(conditionalProcess.c_str(), false, ImGuiSelectableFlags_None, textSize)) {
 				ImGui::OpenPopup("Pick a process");
 			}
 
@@ -65,6 +79,28 @@ class StatusBar : public Element {
 				if (ImGui::BeginChild("Process list", ImVec2(400, 300), true)) {
 					static char search[128] = "";
 					ImGui::InputText("Search", search, IM_ARRAYSIZE(search));
+
+					std::vector<Process> processes = GetProcessList();
+
+					for (const Process &process : processes) {
+						std::string processLower = process.name;
+						std::string searchLower = search;
+
+						std::transform(processLower.begin(), processLower.end(), processLower.begin(), ::tolower);
+						std::transform(searchLower.begin(), searchLower.end(), searchLower.begin(), ::tolower);
+
+						if (strstr(processLower.c_str(), searchLower.c_str()) == nullptr)
+							continue;
+
+						if (ImGui::Selectable(process.name.c_str(), false)) {
+							globals::process = process;
+							//this->selectedProcess = globals::process.name + " : " + std::to_string(globals::process.pid);
+
+							INFO("Selected process %s with PID %d and handle %p\n", globals::process.name.c_str(), globals::process.pid, &globals::process.handle);
+
+							ImGui::CloseCurrentPopup();
+						}
+					}
 				}
 
 				ImGui::EndChild();

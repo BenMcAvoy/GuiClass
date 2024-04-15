@@ -1,5 +1,5 @@
 # Project configuration
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5...3.19)
 project(GuiClass)
 
 # Lib paths
