@@ -18,9 +18,9 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(${GLFW_PATH})
 
 # Configure ImGui
-file(GLOB IMGUI_SOURCES ${IMGUI_PATH}/*.cpp)
+file(GLOB IMGUI_SOURCES ${IMGUI_PATH}/*.cpp ${IMGUI_PATH}/backends/imgui_impl_glfw.cpp ${IMGUI_PATH}/backends/imgui_impl_opengl3.cpp)
 add_library(imgui STATIC ${IMGUI_SOURCES})
-target_include_directories(imgui PUBLIC ${IMGUI_PATH})
+target_include_directories(imgui PUBLIC ${IMGUI_PATH} ${GLFW_PATH}/include)
 
 # Build the project
 add_executable(main main.cpp)
