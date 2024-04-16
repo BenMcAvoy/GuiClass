@@ -26,7 +26,9 @@
 	SETCOLOR(12); printf("[%02d:%02d:%02d.%03d] ", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds); SETCOLOR(7); \
 	printf(__VA_ARGS__); \
 }
-#else
+
+#elif __linux__
+
 #include <stdio.h>
 #include <time.h>
 
