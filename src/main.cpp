@@ -14,16 +14,6 @@
 #include "ribbon.h"
 #include "statusbar.h"
 
-/* Called for rendering */
-void render() {
-	ImGui::Begin("ImGui");
-
-	ImGui::Text("Hello, world!");
-	INFO("Hello, world!\n");
-
-	ImGui::End();
-}
-
 Ribbon ribbon;
 StatusBar statusbar;
 
