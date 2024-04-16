@@ -24,10 +24,8 @@ class StatusBar : public Element {
 				if (ImGui::MenuItem("New", "Ctrl+N")) {}
 				if (ImGui::MenuItem("Open", "Ctrl+O")) {}
 				if (ImGui::MenuItem("Save", "Ctrl+S")) {}
-				if (ImGui::MenuItem("Quit", "Ctrl+Q")) {
+				if (ImGui::MenuItem("Quit", "Ctrl+Q"))
 					globals::shouldExit = true;
-					INFO("Exiting %d\n", globals::shouldExit);
-				}
 
 				if (ImGui::BeginMenu("Debug")) {
 					if (ImGui::MenuItem("Print handle address")) {
@@ -61,20 +59,20 @@ class StatusBar : public Element {
 				ImGui::EndMenu();
 			}
 
+			std::string displayProcess = globals::process.name;
+			if (globals::process.name != globals::emptyProcess.name)
+				displayProcess += " : " + std::to_string(globals::process.pid);
+
 			float windowWidth = ImGui::GetIO().DisplaySize.x;
-			ImVec2 textSize = ImGui::CalcTextSize(globals::process.name.c_str());
+			ImVec2 textSize = ImGui::CalcTextSize(displayProcess.c_str());
 			ImGui::SetCursorPosX((windowWidth - textSize.x) / 2);
 
-			const std::string displayProcess = globals::process.name + " : " + std::to_string(globals::process.pid);
-			const std::string conditionalProcess = globals::process.name == globals::emptyProcess.name ? "Select a process" : displayProcess;
-			if (ImGui::Selectable(conditionalProcess.c_str(), false, ImGuiSelectableFlags_None, textSize)) {
+			if (ImGui::Selectable(displayProcess.c_str(), false, ImGuiSelectableFlags_None, textSize))
 				ImGui::OpenPopup("Pick a process");
-			}
 
 			if (ImGui::BeginPopupModal("Pick a process", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
-				if (ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_Escape))) {
+				if (ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_Escape)))
 					ImGui::CloseCurrentPopup();
-				}
 
 				if (ImGui::BeginChild("Process list", ImVec2(480, 640), true)) {
 					static char search[128] = "";
