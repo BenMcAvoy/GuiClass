@@ -77,8 +77,6 @@ class StatusBar : public Element {
 				if (ImGui::BeginChild("Process list", ImVec2(480, 640), true)) {
 					static char search[128] = "";
 					ImGui::InputText("Search", search, IM_ARRAYSIZE(search));
-					ImGui::SameLine();
-					ImGui::Text("Results: %lu", globals::processList.size());
 
 					for (const Process &process : globals::processList) {
 						std::string processLower = process.name;
@@ -92,13 +90,12 @@ class StatusBar : public Element {
 
 						if (ImGui::Selectable(process.name.c_str(), false)) {
 							globals::process = process;
-							//this->selectedProcess = globals::process.name + " : " + std::to_string(globals::process.pid);
-
 							INFO("Selected process %s with PID %d and handle %p\n", globals::process.name.c_str(), globals::process.pid, &globals::process.handle);
-
 							ImGui::CloseCurrentPopup();
 						}
 					}
+
+					ImGui::Text("Processes shown: %lu", globals::processList.size());
 				}
 
 				ImGui::EndChild();
