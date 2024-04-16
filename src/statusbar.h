@@ -76,13 +76,13 @@ class StatusBar : public Element {
 					ImGui::CloseCurrentPopup();
 				}
 
-				if (ImGui::BeginChild("Process list", ImVec2(400, 300), true)) {
+				if (ImGui::BeginChild("Process list", ImVec2(480, 640), true)) {
 					static char search[128] = "";
 					ImGui::InputText("Search", search, IM_ARRAYSIZE(search));
+					ImGui::SameLine();
+					ImGui::Text("Results: %lu", globals::processList.size());
 
-					std::vector<Process> processes = GetProcessList();
-
-					for (const Process &process : processes) {
+					for (const Process &process : globals::processList) {
 						std::string processLower = process.name;
 						std::string searchLower = search;
 

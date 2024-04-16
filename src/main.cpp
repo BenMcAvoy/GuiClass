@@ -66,8 +66,17 @@ int main(void) {
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 130");
 
+	double lastProcessListUpdate = 0;
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window) && !globals::shouldExit) {
+		/* Update */
+		if (glfwGetTime() - lastProcessListUpdate >= 1.0) {
+			globals::processList = GetProcessList();
+			lastProcessListUpdate = glfwGetTime();
+			//INFO("Updated process list of length %lu\n", globals::processList.size());
+		}
+
 		glfwPollEvents();
 
 		/* Start the ImGui frame */

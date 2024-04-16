@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "process.h"
 
 namespace globals {
@@ -16,4 +18,6 @@ namespace globals {
 		emptyProcess.pid,
 		emptyProcess.handle
 	);
+
+	std::vector<Process> processList;
 }
