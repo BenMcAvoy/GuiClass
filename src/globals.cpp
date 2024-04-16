@@ -13,11 +13,7 @@ namespace globals {
 		nullptr
 	);
 
-	Process process = Process(
-		emptyProcess.name,
-		emptyProcess.pid,
-		emptyProcess.handle
-	);
+	Process process = emptyProcess;
 
 	std::vector<Process> processList;
 }
