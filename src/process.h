@@ -1,20 +1,26 @@
 #pragma once
 
 #ifdef _WIN32
-
-#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#endif
 
 #include <string>
 
+// NOTE: `handle` is a `HANDLE` on Windows and a `void*` on Linux
+// NOTE: `pid` is a `DWORD` on Windows and a `pid_t` on Linux
 class Process {
 public:
 	std::string name;
-	DWORD pid;
 
+#ifdef _WIN32
+	DWORD pid;
 	HANDLE handle;
 
     Process(std::string name, DWORD pid, HANDLE handle) : name(name), pid(pid), handle(handle) {}
-};
+#elif __linux__
+	pid_t pid;
+	void* handle;
 
+    Process(std::string name, pid_t pid, void* handle) : name(name), pid(pid), handle(handle) {}
 #endif
+};
