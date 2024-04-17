@@ -1,4 +1,4 @@
-name: build
+name: todo
 on: [push]
 
 jobs:
