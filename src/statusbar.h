@@ -13,6 +13,7 @@
 #include <vector>
 #include <cctype>
 
+// TODO: Drop this and implement a widget properly for StatusBar: https://github.com/ocornut/imgui/issues/2992
 class StatusBar : public Element {
 	private:
 		bool processPickerModalOpen = false;
