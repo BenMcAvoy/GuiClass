@@ -67,17 +67,27 @@ jobs:
     - name: Build
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
-    - name: Upload build artifacts
-      # Upload the build output directory as an artifact. This allows you to download the build output from the GitHub UI.
+    # On Windows upload `$steps.strings.outputs.build-output-dir/Release/GuiClass.exe`
+    # On Linux upload `$steps.strings.outputs.build-output-dir/GuiClass`
+
+    - name: Windows Upload
+      if: startsWith(matrix.os, 'windows')
       uses: actions/upload-artifact@v2
       with:
-        name: build
-        path: ${{ steps.strings.outputs.build-output-dir }}
+        name: GuiClass
+        path: ${{ steps.strings.outputs.build-output-dir }}/Release/GuiClass.exe
 
-    - name: If we have a tag, create a release
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v1
+    - name: Linux Upload
+      if: startsWith(matrix.os, 'ubuntu')
+      uses: actions/upload-artifact@v2
       with:
-        files: ${{ steps.strings.outputs.build-output-dir }}/*
-        tag_name: ${{ github.ref }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        name: GuiClass
+        path: ${{ steps.strings.outputs.build-output-dir }}/GuiClass
+
+    # - name: If we have a tag, create a release
+    #   if: startsWith(github.ref, 'refs/tags/')
+    #   uses: softprops/action-gh-release@v1
+    #   with:
+    #     files: ${{ steps.strings.outputs.build-output-dir }}/*
+    #     tag_name: ${{ github.ref }}
+    #     token: ${{ secrets.GITHUB_TOKEN }}
