@@ -6,6 +6,7 @@
 
 #include <string>
 
+// TODO: Find a way to standardise this
 // NOTE: `handle` is a `HANDLE` on Windows and a `void*` on Linux
 // NOTE: `pid` is a `DWORD` on Windows and a `pid_t` on Linux
 class Process {
