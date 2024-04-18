@@ -53,7 +53,7 @@ int main(void) {
 	style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.5f, 0.5f, 0.5f, 1.0f);
 
 	if (io.Fonts->Fonts.empty())
-		ERROR("Failed to load font\n");
+		GC_ERROR("Failed to load font\n");
 
 	/* Setup Dear ImGui style */
 	ImGui::StyleColorsDark();
@@ -70,7 +70,7 @@ int main(void) {
 		if (glfwGetTime() - lastProcessListUpdate >= 1.0) {
 			globals::processList = GetProcessList();
 			lastProcessListUpdate = glfwGetTime();
-			//INFO("Updated process list of length %lu\n", globals::processList.size());
+			// GC_INFO("Updated process list of length %lu\n", globals::processList.size());
 		}
 
 		glfwPollEvents();
