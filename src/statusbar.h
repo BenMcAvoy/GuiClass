@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STATUSBAR_H
+#define STATUSBAR_H
 
 #include "globals.cpp"
 #include "logging.h"
@@ -108,3 +109,5 @@ class StatusBar {
 			ImGui::PopID();
 		}
 };
+
+#endif // STATUSBAR_H

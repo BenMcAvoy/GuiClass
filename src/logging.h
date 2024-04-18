@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LOGGING_H
+#define LOGGING_H
 
 #ifdef _WIN32
 #include <windows.h>
@@ -60,4 +61,6 @@
     SETCOLOR(31); printf("[%02d:%02d:%02d] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec); SETCOLOR(0); \
     printf(__VA_ARGS__); \
 }
-#endif
+#endif // _WIN32
+
+#endif // LOGGING_H

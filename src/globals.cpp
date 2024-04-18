@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GLOBALS_H
+#define GLOBALS_H
 
 #include <vector>
 
@@ -17,3 +18,5 @@ namespace globals {
 
 	std::vector<Process> processList;
 }
+
+#endif // GLOBALS_H

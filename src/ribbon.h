@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RIBBON_H
+#define RIBBON_H
 
 #include "logging.h"
 #include <imgui.h>
@@ -49,3 +50,5 @@ class Ribbon {
 			ImGui::PopID();
 		}
 };
+
+#endif // RIBBON_H

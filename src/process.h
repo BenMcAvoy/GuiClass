@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROCESS_H
+#define PROCESS_H
 
 #ifdef _WIN32
 #include <windows.h>
@@ -24,3 +25,5 @@ public:
     Process(std::string name, pid_t pid, void* handle) : name(name), pid(pid), handle(handle) {}
 #endif
 };
+
+#endif // PROCESS_H
