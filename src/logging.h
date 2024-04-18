@@ -21,12 +21,23 @@
 	printf(__VA_ARGS__); \
 }
 
-#define GC_ERROR(...) { \
-	SYSTEMTIME st; \
-	GetLocalTime(&st); \
-	SETCOLOR(12); printf("[%02d:%02d:%02d.%03d] ", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds); SETCOLOR(7); \
-	printf(__VA_ARGS__); \
-}
+#ifndef DEBUG
+    #define GC_ERROR(...) { \
+        SYSTEMTIME st; \
+        GetLocalTime(&st); \
+        char message[256]; \
+        sprintf_s(message, "[%02d:%02d:%02d.%03d] ", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds); \
+        strcat_s(message, __VA_ARGS__); \
+        MessageBox(NULL, message, "Error", MB_OK); \
+    }
+#else
+    #define GC_ERROR(...) { \
+        SYSTEMTIME st; \
+        GetLocalTime(&st); \
+        SETCOLOR(12); printf("[%02d:%02d:%02d.%03d] ", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds); SETCOLOR(7); \
+        printf(__VA_ARGS__); \
+    }
+#endif
 
 #elif __linux__
 
