@@ -1,18 +1,14 @@
-name: todo
+name: "Run TODO to Issue"
 on: [push]
 
 jobs:
-  todo:
+  todos:
     permissions:
       issues: write
-
-    runs-on: ubuntu-latest
-
+    runs-on: "ubuntu-latest"
     steps:
-    - name: Download repo
-      uses: actions/checkout@v4
-
-    - name: TODO to Issue
-      uses: "alstr/todo-to-issue-action@v4"
-      with:
-        AUTO_ASSIGN: true
+      - uses: "actions/checkout@v3"
+      - name: "TODO to Issue"
+        uses: "alstr/todo-to-issue-action@v4"
+        with:
+          AUTO_ASSIGN: true
