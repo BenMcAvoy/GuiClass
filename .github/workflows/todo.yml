@@ -1,15 +1,14 @@
-name: todo
+name: "Run TODO to Issue"
 on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  todos:
+    permissions:
+      issues: write
+    runs-on: "ubuntu-latest"
     steps:
-    - name: Download repo
-      uses: actions/checkout@v4
-
-    - name: Run Issue Bot
-      uses: derjuulsn/todo-issue@main
-      with:
-        excludePattern: '^(include/)'
+      - uses: "actions/checkout@v3"
+      - name: "TODO to Issue"
+        uses: "alstr/todo-to-issue-action@v4"
+        with:
+          AUTO_ASSIGN: true
