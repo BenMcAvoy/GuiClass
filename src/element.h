@@ -1,6 +1,6 @@
 #pragma once
 
-// TODO: drop this
+// TODO: drop element class
 class Element {
 public:
 	virtual void Render() = 0;
