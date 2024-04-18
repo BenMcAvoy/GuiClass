@@ -20,29 +20,29 @@ class Ribbon {
 			const ImVec2 size = ImVec2(96, 24);
 
 			if (ImGui::Button("Add 4", size)) {
-				INFO("Add 4 callback\n");
+				GC_INFO("Add 4 callback\n");
 			};
 
 			if (ImGui::Button("Add 16", size)) {
-				INFO("Add 16 callback\n");
+				GC_INFO("Add 16 callback\n");
 			};
 
 			if (ImGui::Button("Add 256", size)) {
-				INFO("Add 256 callback\n");
+				GC_INFO("Add 256 callback\n");
 			};
 
 			ImGui::NextColumn();
 
 			if (ImGui::Button("Sub 4", size)) {
-				INFO("Subtract 4 callback\n");
+				GC_INFO("Subtract 4 callback\n");
 			};
 
 			if (ImGui::Button("Sub 16", size)) {
-				INFO("Subtract 16 callback\n");
+				GC_INFO("Subtract 16 callback\n");
 			};
 
 			if (ImGui::Button("Sub 256", size)) {
-				INFO("Subtract 256 callback\n");
+				GC_INFO("Subtract 256 callback\n");
 			};
 
 			ImGui::End();

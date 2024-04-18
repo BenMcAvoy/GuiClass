@@ -39,12 +39,12 @@ std::vector<Process> GetProcessList() {
     HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 
     if (snap == INVALID_HANDLE_VALUE) {
-        ERROR("Failed to get PROCESSENTRY32 snapshot\n");
+        GC_ERROR("Failed to get PROCESSENTRY32 snapshot\n");
         return {};
     }
 
     if (!Process32First(snap, &pe32)) {
-        ERROR("Failed to get first process\n");
+        GC_ERROR("Failed to get first process\n");
         CloseHandle(snap);
         return {};
     }
@@ -72,7 +72,7 @@ std::vector<Process> GetProcessList() {
     DIR *dir = opendir("/proc");
 
     if (!dir) {
-        ERROR("Failed to open /proc\n");
+        GC_ERROR("Failed to open /proc\n");
         return {};
     }
 
