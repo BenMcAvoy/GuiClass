@@ -12,9 +12,6 @@
 #include <cctype>
 
 class StatusBar {
-	private:
-		bool processPickerModalOpen = false;
-
 	public:
 		void Render() {
 			ImGui::PushID("statusbar");
@@ -30,7 +27,7 @@ class StatusBar {
 
 				if (ImGui::BeginMenu("Debug")) {
 					if (ImGui::MenuItem("Print handle address")) {
-						INFO("Handle address: %p\n", &globals::process.handle);
+						INFO("Handle address: %p\n", globals::process.handle);
 					}
 
 					ImGui::EndMenu();
@@ -46,7 +43,7 @@ class StatusBar {
 					ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
 
 				if (ImGui::MenuItem("Detach", "Ctrl+D", false, !disabled)) {
-					INFO("Detaching from process with handle %p\n", &globals::process.handle);
+					INFO("Detaching from process with handle %p\n", globals::process.handle);
 					globals::process = globals::emptyProcess;
 
 #ifdef _WIN32
@@ -91,7 +88,7 @@ class StatusBar {
 
 						if (ImGui::Selectable(process.name.c_str(), false)) {
 							globals::process = process;
-							INFO("Selected process %s with PID %d and handle %p\n", globals::process.name.c_str(), globals::process.pid, &globals::process.handle);
+							INFO("Selected process %s with PID %d and handle %p\n", globals::process.name.c_str(), globals::process.pid, globals::process.handle);
 							ImGui::CloseCurrentPopup();
 						}
 					}
