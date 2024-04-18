@@ -1,4 +1,5 @@
-#pragma once
+#ifndef UTILS_H
+#define UTILS_H
 
 #include <unordered_map>
 #include <vector>
@@ -78,7 +79,7 @@ std::vector<Process> GetProcessList() {
             continue;
         }
 
-        char path[256];
+        char path[270];
         snprintf(path, sizeof(path), "/proc/%s/cmdline", entry->d_name);
 
         int fd = open(path, O_RDONLY);
@@ -119,3 +120,5 @@ std::vector<Process> GetProcessList() {
     return processes;
 }
 #endif
+
+#endif // UTILS_H
