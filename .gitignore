@@ -1,2 +1,6 @@
+# CMake files
 .cache
 build
+
+# ImGui storage
+imgui.ini
