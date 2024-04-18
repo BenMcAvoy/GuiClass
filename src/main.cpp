@@ -24,6 +24,12 @@ Ribbon ribbon;
 StatusBar statusbar;
 
 int main(void) {
+#ifndef DEBUG
+#ifdef _WIN32
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
+#endif
+#endif
+
 	GLFWwindow* window;
 
 	/* Initialize the library */

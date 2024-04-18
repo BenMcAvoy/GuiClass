@@ -49,6 +49,7 @@ class StatusBar {
 				ImGui::EndMenu();
 			}
 
+#ifdef DEBUG
 			if (ImGui::BeginMenu("Debug")) {
 				if (ImGui::MenuItem("Print handle")) {
 					GC_INFO("Handle: %p\n", globals::process.handle);
@@ -62,6 +63,7 @@ class StatusBar {
 
 				ImGui::EndMenu();
 			}
+#endif
 
 			std::string displayProcess = globals::process.name;
 			if (globals::process.name != globals::emptyProcess.name)

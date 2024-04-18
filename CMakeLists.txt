@@ -42,3 +42,7 @@ if (MSVC)
 	# Enable all warnings and treat them as errors
 	target_compile_options(GuiClass PRIVATE /W4 /WX)
 endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(DEBUG)
+endif()
