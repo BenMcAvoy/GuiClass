@@ -25,14 +25,6 @@ class StatusBar {
 				if (ImGui::MenuItem("Quit", "Ctrl+Q"))
 					globals::shouldExit = true;
 
-				if (ImGui::BeginMenu("Debug")) {
-					if (ImGui::MenuItem("Print handle address")) {
-						GC_INFO("Handle address: %p\n", globals::process.handle);
-					}
-
-					ImGui::EndMenu();
-				}
-
 				ImGui::EndMenu();
 			}
 
@@ -53,6 +45,20 @@ class StatusBar {
 
 				if (disabled)
 					ImGui::PopStyleVar();
+
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu("Debug")) {
+				if (ImGui::MenuItem("Print handle")) {
+					GC_INFO("Handle: %p\n", globals::process.handle);
+				}
+
+				if (ImGui::MenuItem("Print all logs")) {
+					GC_INFO("Log output\n");
+					GC_WARN("Log output\n");
+					GC_ERROR("Log output\n");
+				}
 
 				ImGui::EndMenu();
 			}
