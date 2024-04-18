@@ -4,7 +4,8 @@
 #include "logging.h"
 #include <imgui.h>
 
-// TODO: Modify this to implement a widget properly for Ribbon: https://github.com/ocornut/imgui/issues/2992
+// TODO: Modify this to implement a widget properly for Ribbon
+// Context: https://github.com/ocornut/imgui/issues/2992
 class Ribbon : public Element {
 	public:
 		void Render() override {
