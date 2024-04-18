@@ -3,10 +3,10 @@
 
 #include "globals.cpp"
 #include "logging.h"
+#include "utils.h"
 
 #include <imgui.h>
 
-#include <algorithm>
 #include <string>
 #include <vector>
 #include <cctype>
@@ -77,11 +77,8 @@ class StatusBar {
 					ImGui::InputText("Search", search, IM_ARRAYSIZE(search));
 
 					for (const Process &process : globals::processList) {
-						std::string processLower = process.name;
-						std::string searchLower = search;
-
-						std::transform(processLower.begin(), processLower.end(), processLower.begin(), ::tolower);
-						std::transform(searchLower.begin(), searchLower.end(), searchLower.begin(), ::tolower);
+						std::string processLower = STR_LOWER(process.name);
+						std::string searchLower = STR_LOWER(search);
 
 						if (strstr(processLower.c_str(), searchLower.c_str()) == nullptr)
 							continue;

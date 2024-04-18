@@ -2,11 +2,22 @@
 #define UTILS_H
 
 #include <unordered_map>
+#include <algorithm>
 #include <vector>
 #include <string>
 
 #include "logging.h"
 #include "process.h"
+
+#if true // Cross-platform
+std::string STR_LOWER(const std::string& str) {
+    std::string result = str;
+    std::transform(result.begin(), result.end(), result.begin(),
+        [](unsigned char c){ return std::tolower(c); });
+
+    return result;
+}
+#endif // Cross-platform
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
