@@ -11,11 +11,13 @@
 
 #if true // Cross-platform
 std::string STR_LOWER(const std::string& str) {
-    std::string result = str;
-    std::transform(result.begin(), result.end(), result.begin(),
-        [](unsigned char c){ return std::tolower(c); });
+  std::string result = str;
 
-    return result;
+	std::transform(result.begin(), result.end(), result.begin(), [](unsigned char c) -> unsigned char {
+    return static_cast<unsigned char>(std::tolower(c));
+	});
+
+	return result;
 }
 #endif // Cross-platform
 
