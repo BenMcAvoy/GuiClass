@@ -1,14 +1,13 @@
 #pragma once
 
-#include "element.h"
 #include "logging.h"
 #include <imgui.h>
 
-// TODO: Modify this to implement a widget properly for Ribbon
-// Context: https://github.com/ocornut/imgui/issues/2992
-class Ribbon : public Element {
+class Ribbon {
 	public:
-		void Render() override {
+		void Render() {
+			ImGui::PushID("ribbon");
+
 			ImGui::SetNextWindowPos(ImVec2(0, ImGui::GetFrameHeight()), ImGuiCond_Always);
 			ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, 96), ImGuiCond_Always);
 			ImGui::Begin("Ribbon", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
@@ -46,5 +45,7 @@ class Ribbon : public Element {
 			};
 
 			ImGui::End();
+
+			ImGui::PopID();
 		}
 };

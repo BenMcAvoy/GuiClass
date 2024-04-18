@@ -1,27 +1,25 @@
 #pragma once
 
 #include "globals.cpp"
-#include "element.h"
 #include "logging.h"
-#include "utils.h"
 
 #include <imgui.h>
 
 #include <algorithm>
-#include <iostream>
 #include <string>
 #include <vector>
 #include <cctype>
 
-// TODO: Modify this to implement a widget properly for StatusBar
-// Context: https://github.com/ocornut/imgui/issues/2992
-class StatusBar : public Element {
+class StatusBar {
 	private:
 		bool processPickerModalOpen = false;
 
 	public:
-		void Render() override {
+		void Render() {
+			ImGui::PushID("statusbar");
+
 			ImGui::BeginMainMenuBar();
+
 			if (ImGui::BeginMenu("File")) {
 				if (ImGui::MenuItem("New", "Ctrl+N")) {}
 				if (ImGui::MenuItem("Open", "Ctrl+O")) {}
@@ -106,5 +104,7 @@ class StatusBar : public Element {
 
 
 			ImGui::EndMainMenuBar();
+
+			ImGui::PopID();
 		}
 };

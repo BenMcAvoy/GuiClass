@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 #include "font.h"
+#include "utils.h"
 #include "logging.h"
 
 #include "globals.cpp"
