@@ -1,7 +1,6 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-#ifdef _WIN32
 #include <windows.h>
 #include <stdio.h>
 
@@ -38,40 +37,5 @@
         printf(__VA_ARGS__); \
     }
 #endif
-
-#elif __linux__
-
-#include <stdio.h>
-#include <time.h>
-
-#define SETCOLOR(color) printf("\033[%dm", color)
-
-#define GC_INFO(...) { \
-    time_t rawtime; \
-    struct tm *timeinfo; \
-    time(&rawtime); \
-    timeinfo = localtime(&rawtime); \
-    SETCOLOR(32); printf("[%02d:%02d:%02d] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec); SETCOLOR(0); \
-    printf(__VA_ARGS__); \
-}
-
-#define GC_WARN(...) { \
-    time_t rawtime; \
-    struct tm *timeinfo; \
-    time(&rawtime); \
-    timeinfo = localtime(&rawtime); \
-    SETCOLOR(33); printf("[%02d:%02d:%02d] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec); SETCOLOR(0); \
-    printf(__VA_ARGS__); \
-}
-
-#define GC_ERROR(...) { \
-    time_t rawtime; \
-    struct tm *timeinfo; \
-    time(&rawtime); \
-    timeinfo = localtime(&rawtime); \
-    SETCOLOR(31); printf("[%02d:%02d:%02d] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec); SETCOLOR(0); \
-    printf(__VA_ARGS__); \
-}
-#endif // _WIN32
 
 #endif // LOGGING_H

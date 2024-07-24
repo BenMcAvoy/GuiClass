@@ -38,9 +38,7 @@ class StatusBar {
 					GC_INFO("Detaching from process with handle %p\n", globals::process.handle);
 					globals::process = globals::emptyProcess;
 
-#ifdef _WIN32
 					CloseHandle(globals::process.handle);
-#endif
 				}
 
 				if (disabled)

@@ -1,9 +1,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-#ifdef _WIN32
 #include <windows.h>
-#endif
 
 #include <string>
 
@@ -13,17 +11,10 @@ class Process {
 public:
 	std::string name;
 
-#ifdef _WIN32
 	DWORD pid;
 	HANDLE handle;
 
-    Process(std::string name, DWORD pid, HANDLE handle) : name(name), pid(pid), handle(handle) {}
-#elif __linux__
-	pid_t pid;
-	void* handle;
-
-    Process(std::string name, pid_t pid, void* handle) : name(name), pid(pid), handle(handle) {}
-#endif
+  Process(std::string name, DWORD pid, HANDLE handle) : name(name), pid(pid), handle(handle) {}
 };
 
 #endif // PROCESS_H

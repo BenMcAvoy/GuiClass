@@ -1,7 +1,5 @@
-#ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
-#endif
 
 #include <GLFW/glfw3.h>
 
@@ -25,9 +23,7 @@ StatusBar statusbar;
 
 int main(void) {
 #ifndef DEBUG
-#ifdef _WIN32
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
-#endif
 #endif
 
 	GLFWwindow* window;
